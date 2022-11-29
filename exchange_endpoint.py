@@ -13,7 +13,6 @@ import math
 import sys
 import traceback
 
-# TODO: make sure you implement connect_to_algo, send_tokens_algo, and send_tokens_eth
 from web3 import Web3
 from models import Base, Order, Log
 from send_tokens import connect_to_algo, connect_to_eth, send_tokens_algo, send_tokens_eth
@@ -95,7 +94,6 @@ def connect_to_blockchains():
 
 def log_message(message_dict):
     msg = json.dumps(message_dict)
-    # TODO: Add message to the Log table
     g.session.add(Log(message=msg))
     g.session.commit()
 
@@ -103,7 +101,6 @@ def log_message(message_dict):
 
 
 def get_algo_keys():
-    # TODO: Generate or read (using the mnemonic secret)
     # the algorand public/private keys
     import algosdk as ak
     sk, pk = ak.account.generate_account()
@@ -116,7 +113,6 @@ def get_algo_keys():
 def get_eth_keys(filename="eth_mnemonic.txt"):
     w3 = Web3()
 
-    # TODO: Generate or read (using the mnemonic secret)
     # the ethereum public/private keys
     eth_pk = '0xa1D0635b58d408825B29E33a18b053Cb09daF27D'
     eth_sk = b'\xe5\x9b\xe1\xa8\xe2\x91\xec)\x1e\xb1\xcf\x85\\Ow\xee\x90\x8c\xf7\r\xf7\x9a\x06<{1_\x0c\x9d\xad{\xa8'
@@ -125,7 +121,6 @@ def get_eth_keys(filename="eth_mnemonic.txt"):
 
 
 def fill_order(order, txes=[]):
-    # TODO:
     # Match orders (same as Exchange Server II)
     # Validate the order has a payment to back it (make sure the counterparty also made a payment)
     # Make sure that you end up executing all resulting transactions!
@@ -196,7 +191,6 @@ def execute_txes(txes):
     algo_txes = [tx for tx in txes if tx['platform'] == "Algorand"]
     eth_txes = [tx for tx in txes if tx['platform'] == "Ethereum"]
 
-    # TODO:
     #       1. Send tokens on the Algorand and eth testnets, appropriately
     #          We've provided the send_tokens_algo and send_tokens_eth skeleton methods in send_tokens.py
     #       2. Add all transactions to the TX table
